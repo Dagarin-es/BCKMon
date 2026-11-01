@@ -1,0 +1,12 @@
+services:
+  bckmon:
+    image: dagarines/bckmon:latest   # o una versión fija / beta, p. ej. dagarines/bckmon:2.0.0-beta.10
+    container_name: bckmon
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATA_DIR: /data      # fijo: el .env no puede cambiarlo
+    ports:
+      - "3001:3000"        # BCKMon en el 3001 si PVEMon ya usa el 3000
+    volumes:
+      - ./data:/data       # config.db + metrics.db (incluir en las copias de seguridad)
