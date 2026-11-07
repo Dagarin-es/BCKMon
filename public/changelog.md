@@ -1,6 +1,12 @@
 # ChangeLog de PVEMon
 Historial reconstruido desde la primera versión numerada. Lo más reciente, primero.
 
+## 2.1.0 · 07/11/2026
+**Primera versión estable de la serie 2.** Reúne todo lo de las betas 2.0.0-beta.1 a beta.16 (ver abajo). Puedes volver a la 1.5.7 cuando quieras (`docs/VOLVER-A-1.5.7.md`); la base de datos no cambia.
+- Nuevo desplegable de plantillas de formato con una opción **«Plantilla en blanco»** que vacía el formulario para empezar desde cero.
+- Los desplegables tienen una flecha propia, más clara y visible en modo claro y oscuro.
+- Se retira la etiqueta «Beta» de la cabecera y del login: se mostrará sola en cualquier versión futura con guion (por ejemplo 2.2.0-beta.1).
+
 ## 2.0.0-beta.16 · 07/11/2026
 - **Cabecera de los anillos**: el texto «usado/total» pasa debajo del título (ya no se desalinea) y a la derecha hay un **semáforo** según el porcentaje de uso: verde por debajo del 80 %, amarillo del 80 al 95 %, rojo por encima del 95 %. Vale para nodos, máquinas y contenedores.
 - **Formato integrado de Synology Hyper Backup**: el interruptor es ahora un botón claro («Desactivar / Activar formato integrado») con su estado («activado / desactivado») junto al nombre.

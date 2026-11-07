@@ -1054,5 +1054,7 @@
   "Desactivar formato integrado": "Turn off built-in format",
   "Activar formato integrado": "Turn on built-in format",
   "· activado": "· on",
-  "· desactivado": "· off"
+  "· desactivado": "· off",
+  "Formulario en blanco: rellénalo desde cero.": "Blank form: fill it in from scratch.",
+  "Plantilla en blanco (empezar desde cero)": "Blank template (start from scratch)"
 }

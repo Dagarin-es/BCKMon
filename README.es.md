@@ -10,8 +10,7 @@ BCKMon es la **edición solo de copias de [PVEMon](https://github.com/Dagarin-es
 con el mismo código. BCKMon no se conecta a Proxmox ni a Docker ni escanea la red. Si además quieres vigilar
 servidores Proxmox, máquinas virtuales, contenedores y discos, usa PVEMon.
 
-> **Beta.** La serie 2.0 se publica como betas (`dagarines/bckmon:2.0.0-beta.N`). En Docker Hub, `latest` solo
-> se mueve cuando sale una versión estable. El historial de cambios está en [`public/changelog.md`](public/changelog.md)
+> **Estable.** La versión 2.1 es la primera estable (`dagarines/bckmon:2.1.0`, también `latest`). El historial de cambios está en [`public/changelog.md`](public/changelog.md)
 > (también tras el botón **ChangeLog** del menú).
 
 ## Qué incluye

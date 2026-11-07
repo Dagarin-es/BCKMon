@@ -1,6 +1,12 @@
 # PVEMon ChangeLog
 History rebuilt from the first numbered version. Most recent first.
 
+## 2.1.0 · 07/11/2026
+**First stable release of the 2 series.** It gathers everything from betas 2.0.0-beta.1 to beta.16 (see below). You can go back to 1.5.7 at any time (`docs/VOLVER-A-1.5.7.md`); the database does not change.
+- New format-template dropdown with a **“Blank template”** option that clears the form so you can start from scratch.
+- Dropdowns have their own, clearer arrow, visible in light and dark mode.
+- The “Beta” tag is removed from the header and the login: it will show up by itself on any future version with a hyphen (for example 2.2.0-beta.1).
+
 ## 2.0.0-beta.16 · 07/11/2026
 - **Ring headers**: the “used/total” text moves below the title (no more misalignment) and on the right there is a **traffic light** based on the usage percentage: green below 80 %, yellow 80–95 %, red above 95 %. Applies to nodes, machines and containers.
 - **Built-in Synology Hyper Backup format**: the switch is now a clear button (“Turn off / Turn on built-in format”) with its state (“on / off”) next to the name.
