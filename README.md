@@ -1,62 +1,62 @@
-# BCKMon
+# Notas para la Release de GitHub · 2.1.0 (versión estable)
 
-🇬🇧 English · 🇪🇸 [Castellano](README.es.md)
+**Título:** `2.1.0`
+**Etiqueta:** `v2.1.0` · marcar **Set as the latest release** (NO es pre-release)
 
-**Backup monitor.** A read-only PWA that tells you whether your backups really ran: it reads the notification
-emails (IMAP), checks files on a network disk (NFS) and warns you through push, email, Telegram, webhook or
-Microsoft Teams when a backup fails, is missing or has not arrived on time.
+Pega este texto en la descripción (sirve igual para el repositorio de PVEMon y para el de BCKMon):
 
-BCKMon is the **backups-only edition of [PVEMon](https://github.com/Dagarin-es/PVEMon)**: both are built from the
-same code. BCKMon does not connect to Proxmox or Docker and does not scan your network. If you also want to
-monitor Proxmox servers, VMs, containers and disks, use PVEMon.
+---
 
-> **Beta.** The 2.0 series is published as betas (`dagarines/bckmon:2.0.0-beta.N`). On Docker Hub `latest` only
-> moves when a stable version is released. The change history is in [`public/changelog.en.md`](public/changelog.en.md)
-> (also behind the **ChangeLog** button in the menu).
+## 🇪🇸 Castellano
 
-## What it includes
+**Primera versión estable de la serie 2.** Reúne todo lo de las betas 2.0.0-beta.1 a beta.16. La estable anterior, la **1.5.7**, sigue disponible
+([`docs/VOLVER-A-1.5.7.md`](docs/VOLVER-A-1.5.7.md)); la base de datos no cambia entre ellas.
 
-| Area | Summary |
-|---|---|
-| **Backups by email** | Several IMAP accounts. Built-in format for **Synology Hyper Backup**; your own formats (Cobian, Duplicati, Veeam…) that you can edit and duplicate. Sources and tasks are created from the emails. |
-| **File checks (NFS)** | Looks at a file, a pattern (`copia_*.tar`) or the newest file of a folder on a network disk: size and age. It does not read or copy it. |
-| **Three views** | Settings › Backups: by email, by file, or grouped by source. |
-| **Alerts** | Editable rules, per-task limits, snooze/reactivate, notification when they fire and when they recover. |
-| **Notifications** | Push (Web Push), SMTP email, Telegram, generic JSON webhook and Teams (Workflows). |
-| **Kiosk** | Panels for a wall screen. |
-| **Users** | Administrator and monitor roles, TOTP 2FA, audit log. |
-| **Languages** | English and Spanish, per user. |
-| **System** | Encrypted backup, heartbeat (Healthchecks, Uptime Kuma…), export/import of backup settings with PVEMon (`.bckmonx`). |
+### Imágenes
+- `dagarines/pvemon:2.1.0` · `dagarines/pvemon:latest`
+- `dagarines/bckmon:2.1.0` · `dagarines/bckmon:latest`
 
-## Installation
+### Novedades respecto a la 1.5.7
+- **BCKMon**: segunda aplicación, con el mismo código, centrada solo en las **copias de seguridad** (correo IMAP, comprobación de archivos NFS, alertas, notificaciones, kioscos y usuarios). No se conecta a Proxmox ni a Docker.
+- **5 paletas de color** (Aurora, Lima, Cobre, Índigo y Grafito) en las dos aplicaciones, con modo oscuro y claro y logo propio; se eligen en Personalizar. PVEMon sigue en Aurora por defecto; BCKMon usa Cobre.
+- **Nodos y máquinas**: tres anillos (CPU, Memoria y Disco) con semáforo (verde < 80 %, amarillo 80–95 %, rojo > 95 %) y una tabla con cada máquina o contenedor; al marcar una fila se resalta en los tres anillos. Ficha de contenedor con sus tres anillos.
+- **Varias cuentas de correo** para leer los avisos de copias, con editar y duplicar.
+- **Formatos de correo**: plantillas (Duplicati, Cobian, Synology Hyper Backup, Proxmox y en blanco), editar y duplicar, «Ignorar si el asunto contiene…» y botón para desactivar el formato integrado de Synology.
+- **Exportar / importar la configuración de copias entre PVEMon y BCKMon** (`.bckmonx`, cifrado con una frase).
+- **Personalizar** reorganizado (Perfil y Avisos); selector de idioma del login más discreto.
+- **Sesiones independientes**: BCKMon usa su propia cookie, así que no cierra la sesión de PVEMon en el mismo navegador e IP.
+- Imagen basada en Debian 13 (`node:22-trixie-slim`); BCKMon tiene su propio repositorio e imagen.
 
-Image: [`dagarines/bckmon`](https://hub.docker.com/r/dagarines/bckmon) (amd64 and arm64). Create a folder with
-the `docker-compose.yml` from [`repo-bckmon/docker-compose.yml`](repo-bckmon/docker-compose.yml) (it uses port
-3001 so it can live next to PVEMon) and run:
-
-```bash
-echo "SECRET_KEY=$(openssl rand -base64 32)" > .env     # KEEP IT: it encrypts the stored secrets
-mkdir -p data
-docker compose up -d
-docker compose exec bckmon node dist/cli.js create-admin admin   # shows the password ONCE
-curl localhost:3001/api/health
+### Actualizar
 ```
+docker compose pull && docker compose up -d
+```
+Conserva `data/` y `.env`. Las migraciones son automáticas. En BCKMon hay que iniciar sesión una vez tras actualizar.
 
-- **Keep `SECRET_KEY`**: it encrypts stored passwords; without it they cannot be decrypted.
-- Recover access: `docker compose exec bckmon node dist/cli.js reset-password admin`.
-- Update: `docker compose pull && docker compose up -d` (migrations are automatic; keep `data/` and `.env`).
-- The container runs as **root** (needed so the NFS check can come from a reserved port).
-- Behind a reverse proxy (e.g. Nginx Proxy Manager): `http`, host IP, port `3001`, Websockets on; push and
-  installing as an app require HTTPS. Close the port to the rest of the network.
-- Variables: see the table in the [PVEMon README](README-PVEMON.md#environment-variables); `EDITION=bckmon` is already set in the image.
+---
 
-## Using PVEMon and BCKMon together
+## 🇬🇧 English
 
-You can run both on the same machine on different ports with **separate data folders**. To move your backup
-configuration from one to the other, use **Settings › System** in each: PVEMon exports and BCKMon imports, and the
-other way round. The file is encrypted with a passphrase you choose.
+**First stable release of the 2 series.** It gathers everything from betas 2.0.0-beta.1 to beta.16. The previous stable version, **1.5.7**, is still available
+([`docs/VOLVER-A-1.5.7.md`](docs/VOLVER-A-1.5.7.md), in Spanish); the database does not change between them.
 
-## Source and Issues
+### Images
+- `dagarines/pvemon:2.1.0` · `dagarines/pvemon:latest`
+- `dagarines/bckmon:2.1.0` · `dagarines/bckmon:latest`
 
-This repository is a mirror of the same code as PVEMon, published so BCKMon has its own Issues and releases.
-Code changes are made in the main project and published to both.
+### What's new compared with 1.5.7
+- **BCKMon**: a second application built from the same code, focused only on **backups** (IMAP mail, NFS file checks, alerts, notifications, kiosks and users). It does not connect to Proxmox or Docker.
+- **5 colour palettes** (Aurora, Lima, Cobre, Índigo and Grafito) in both applications, with dark and light mode and their own logo; pick one in Personalize. PVEMon stays on Aurora by default; BCKMon uses Cobre.
+- **Nodes and machines**: three rings (CPU, Memory and Disk) with a traffic light (green < 80 %, yellow 80–95 %, red > 95 %) and a table with each machine or container; selecting a row highlights it in all three rings. Container page with its three rings.
+- **Several mail accounts** to read backup notices, with edit and duplicate.
+- **Mail formats**: templates (Duplicati, Cobian, Synology Hyper Backup, Proxmox and blank), edit and duplicate, “Ignore if the subject contains…” and a button to turn off the built-in Synology format.
+- **Export / import backup settings between PVEMon and BCKMon** (`.bckmonx`, passphrase-encrypted).
+- **Personalize** reorganised (Profile and Notifications); a more discreet login language selector.
+- **Independent sessions**: BCKMon uses its own cookie, so it no longer logs you out of PVEMon in the same browser and IP.
+- Image based on Debian 13 (`node:22-trixie-slim`); BCKMon has its own repository and image.
+
+### Update
+```
+docker compose pull && docker compose up -d
+```
+Keeps `data/` and `.env`. Migrations are automatic. In BCKMon you have to sign in once after updating.
