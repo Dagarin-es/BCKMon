@@ -1,6 +1,6 @@
 services:
   bckmon:
-    image: dagarines/bckmon:latest   # o una versión fija, p. ej. dagarines/bckmon:2.1.0
+    image: dagarines/bckmon:latest   # o una versión fija, p. ej. dagarines/bckmon:2.3.0
     container_name: bckmon
     restart: unless-stopped
     env_file: .env
@@ -10,3 +10,4 @@ services:
       - "3001:3000"        # BCKMon en el 3001 si PVEMon ya usa el 3000
     volumes:
       - ./data:/data       # config.db + metrics.db (incluir en las copias de seguridad)
+      # - /ruta/en/tu/equipo:/backups   # carpeta para las copias automáticas (Ajustes → Copia de seguridad → «Carpeta del servidor»)
