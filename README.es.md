@@ -11,6 +11,8 @@ con el mismo código. BCKMon no se conecta a Proxmox ni a Docker ni escanea la r
 servidores Proxmox, máquinas virtuales, contenedores y discos, usa PVEMon.
 
 > **Estable.** La versión 2.1 es la primera estable (`dagarines/bckmon:2.1.0`, también `latest`). El historial de cambios está en [`public/changelog.md`](public/changelog.md)
+
+📘 **Guías (PDF):** [Usuario](public/manuals/BCKMon-Guia-de-usuario.pdf) · [Instalación desde cero](public/manuals/BCKMon-Guia-de-instalacion.pdf) — Docker Compose, Docker Hub y gestores gráficos (Arcane, Portainer…). [English: User](public/manuals/BCKMon-User-Guide.pdf) · [Install](public/manuals/BCKMon-Install-Guide.pdf).
 > (también tras el botón **ChangeLog** del menú).
 
 ## Qué incluye
