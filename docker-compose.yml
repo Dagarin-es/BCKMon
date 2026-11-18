@@ -1,6 +1,6 @@
 services:
   bckmon:
-    image: dagarines/bckmon:latest   # o una versión fija, p. ej. dagarines/bckmon:2.4.3
+    image: dagarines/bckmon:latest   # o una versión fija, p. ej. dagarines/bckmon:2.4.4
     container_name: bckmon
     restart: unless-stopped
     env_file: .env
